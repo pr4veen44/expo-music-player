@@ -1,24 +1,33 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import { Stack, usePathname } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { View } from "react-native";
+import MiniPlayer from "../components/MiniPlayer";
+import { AudioProvider } from "../context/AudioContext";
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
+export default function Layout() {
+  const pathname = usePathname();
+  const showMiniPlayer = !pathname.includes("/player");
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <AudioProvider>
+      <StatusBar style="light" />
+      <View style={{ flex: 1, backgroundColor: "#121212" }}>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: { backgroundColor: "#121212" },
+          }}
+        >
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="player" options={{ headerShown: false }} />
+          <Stack.Screen name="playlist/[id]" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="modal"
+            options={{ headerShown: false, presentation: "transparentModal" }}
+          />
+        </Stack>
+        {showMiniPlayer && <MiniPlayer />}
+      </View>
+    </AudioProvider>
   );
 }

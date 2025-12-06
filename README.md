@@ -1,50 +1,160 @@
-# Welcome to your Expo app 👋
+# 🎵 Audio Player (Expo + React Native)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern local-audio music player built using **Expo**, **expo-av**, and **Expo Router**, featuring playlists, a global audio context, a persistent mini-player, and smooth filesystem-based navigation.
 
-## Get started
 
-1. Install dependencies
+### 🚀 Features
 
-   ```bash
-   npm install
-   ```
+**🎧 Playback Engine**
 
-2. Start the app
+-   Powered by **expo-av** (`Audio.Sound`)
 
-   ```bash
-   npx expo start
-   ```
+-   Global **AudioContext** manages:
 
-In the output, you'll find options to open the app in a
+    -   Loading & unloading tracks
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+    -   Play / pause / seek
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+    -   Playback status tracking (position, duration, isPlaying)
 
-## Get a fresh project
+    -   Queue management (next, previous, set queue, set current)
 
-When you're ready, run:
+-   Single shared audio instance across the app for smooth transitions
 
-```bash
-npm run reset-project
+**🧭 Navigation (Expo Router)**
+
+-   Bottom tab navigation inside `app/(tabs)`
+
+-   Dynamic route pages (e.g., `/playlist/[id]`)
+
+-   Modal routes for overlays
+
+-   MiniPlayer placed inside the root layout to remain visible everywhere
+
+**🎨 UI Components**
+
+-   `MiniPlayer.tsx` --- responsive miniplayer bar
+
+-   `SongRow.tsx` --- song list item with action menu
+
+-   Reusable themed UI: `ThemedText`, `ThemedView`
+
+-   Custom dialogs & parallax scroll integration
+
+**📚 Library & Playlists**
+
+-   Song library stored in central state
+
+-   Dynamic playlist pages (`playlist/[id].tsx`)
+
+-   Add/remove songs from playlists
+
+-   Playlists can trigger queue updates and playback immediately
+
+**🌙 Theming**
+
+-   Global theme in `constants/theme.ts`
+
+-   Dark mode foundation with purple accent colors
+
+-   Theme-aware components via `useThemeColor`
+
+
+### 📂 Directory Structure
+
+```
+app/
+  (tabs)/
+    index.tsx           # Home
+    library.tsx         # Library
+    search.tsx          # Search
+    profile.tsx         # Profile
+    _layout.tsx         # Tab layout
+
+  playlist/
+    [id].tsx            # Playlist detail screen
+
+  player.tsx            # Fullscreen player
+  modal.tsx             # Modal screen
+  _layout.tsx           # Root layout for app
+
+components/
+  MiniPlayer.tsx
+  SongRow.tsx
+  ui/
+
+context/
+  AudioContext.tsx       # Playback state & controls
+
+constants/
+  theme.ts
+
+assets/
+scripts/
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Learn more
+### 🛠 Installation
 
-To learn more about developing your project with Expo, look at the following resources:
+```
+npm install
+npx expo start
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Run on emulator or device
 
-## Join the community
+```
+npx expo run:android
+npx expo run:ios
+```
 
-Join our community of developers creating universal apps.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### 🔊 AudioContext Overview
+
+Handles the entire audio lifecycle:
+
+-   Controls for:
+
+    -   `play()`
+
+    -   `pause()`
+
+    -   `seek(ms)`
+
+    -   `loadTrack(uri)`
+
+-   Maintains:
+
+    -   Current track info
+
+    -   Playback state
+
+    -   Queue & current index
+
+-   Subscribes to playback status updates and exposes them to UI components
+
+-   Used by the MiniPlayer, full player screen, playlists, and library
+
+
+### 🧭 Routing Overview
+
+-   `/` → Home
+
+-   `/player` → Fullscreen player
+
+-   `/playlist/[id]` → Playlist detail page
+
+-   `(tabs)` folder manages bottom tab navigation
+
+-   MiniPlayer rendered globally, visible across all screens
+
+
+### 🧪 Development Commands
+
+Reset Expo cache:
+
+`npx expo start -c`
+
+Reset project files:
+
+`node scripts/reset-project.js`

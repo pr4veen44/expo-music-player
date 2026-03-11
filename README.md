@@ -1,11 +1,11 @@
-# 🎵 Audio Player (Expo + React Native)
+# Audio Player (Expo + React Native)
 
 A modern local-audio music player built using **Expo**, **expo-av**, and **Expo Router**, featuring playlists, a global audio context, a persistent mini-player, and smooth filesystem-based navigation.
 
 
-### 🚀 Features
+### Features
 
-**🎧 Playback Engine**
+**Playback Engine**
 
 -   Powered by **expo-av** (`Audio.Sound`)
 
@@ -21,7 +21,7 @@ A modern local-audio music player built using **Expo**, **expo-av**, and **Expo 
 
 -   Single shared audio instance across the app for smooth transitions
 
-**🧭 Navigation (Expo Router)**
+**Navigation (Expo Router)**
 
 -   Bottom tab navigation inside `app/(tabs)`
 
@@ -31,7 +31,7 @@ A modern local-audio music player built using **Expo**, **expo-av**, and **Expo 
 
 -   MiniPlayer placed inside the root layout to remain visible everywhere
 
-**🎨 UI Components**
+**UI Components**
 
 -   `MiniPlayer.tsx` --- responsive miniplayer bar
 
@@ -41,7 +41,7 @@ A modern local-audio music player built using **Expo**, **expo-av**, and **Expo 
 
 -   Custom dialogs & parallax scroll integration
 
-**📚 Library & Playlists**
+**Library & Playlists**
 
 -   Song library stored in central state
 
@@ -51,7 +51,7 @@ A modern local-audio music player built using **Expo**, **expo-av**, and **Expo 
 
 -   Playlists can trigger queue updates and playback immediately
 
-**🌙 Theming**
+**Theming**
 
 -   Global theme in `constants/theme.ts`
 
@@ -60,7 +60,7 @@ A modern local-audio music player built using **Expo**, **expo-av**, and **Expo 
 -   Theme-aware components via `useThemeColor`
 
 
-### 📂 Directory Structure
+### Directory Structure
 
 ```
 app/
@@ -94,7 +94,7 @@ scripts/
 ```
 
 
-### 🛠 Installation
+### Installation
 
 ```
 npm install
@@ -109,7 +109,7 @@ npx expo run:ios
 ```
 
 
-### 🔊 AudioContext Overview
+### AudioContext Overview
 
 Handles the entire audio lifecycle:
 
@@ -136,7 +136,7 @@ Handles the entire audio lifecycle:
 -   Used by the MiniPlayer, full player screen, playlists, and library
 
 
-### 🧭 Routing Overview
+### Routing Overview
 
 -   `/` → Home
 
@@ -149,7 +149,7 @@ Handles the entire audio lifecycle:
 -   MiniPlayer rendered globally, visible across all screens
 
 
-### 🧪 Development Commands
+### Development Commands
 
 Reset Expo cache:
 
